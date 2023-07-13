@@ -1,6 +1,5 @@
 // React + Next
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 
 // Pages
 import Hero from './hero';
