@@ -12,6 +12,7 @@ import Recipe from "@/interfaces/recipe";
 
 // Constants
 import Diets from "@/constants/diets";
+import Types from "@/constants/types";
 import Cuisines from "@/constants/cuisines";
 import Intolerances from "@/constants/intolerances";
 
@@ -24,6 +25,7 @@ const Recipes = () => {
   // Search Params
   const [query, setQuery] = useState('');
   const [diets, setDiets] = useState<string[]>([]);
+  const [types, setTypes] = useState<string[]>([]);
   const [cuisines, setCuisines] = useState<string[]>([]);
   const [intolerances, setIntolerances] = useState<string[]>([]);
 
@@ -38,6 +40,7 @@ const Recipes = () => {
     const params = {
       query: query,
       diets: diets,
+      types: types,
       cuisines: cuisines,
       intolerances: intolerances
     }
@@ -48,7 +51,8 @@ const Recipes = () => {
   }
 
   const navigate = (destination: string) => {
-    router.push(destination);
+    const cleanURL = destination.replace("https://spoonacular.com/", "");
+    router.push("recipes/" + cleanURL);
   }
 
   return (
@@ -61,12 +65,13 @@ const Recipes = () => {
             <label className="text-slate-900 font-semibold text-center w-full">Enter Ingredient or Dish</label>
             <input 
               className="border border-gray-200 p-1 mt-1 w-full rounded-md text-slate-900" 
-              placeholder="Ex. Chicken Tacos, Beef Stew, ..." 
+              placeholder="Ex. Spring Rolls, Chicken, Tofu, ..." 
               value={query} 
               onChange={handleQueryChange}
             />
 
             <SearchFilters label="Diet" filters={Diets} selectedFilters={diets} changeFilter={setDiets}></SearchFilters>
+            <SearchFilters label="Type" filters={Types} selectedFilters={types} changeFilter={setTypes}></SearchFilters>
             <SearchFilters label="Cuisine" filters={Cuisines} selectedFilters={cuisines} changeFilter={setCuisines}></SearchFilters>
             <SearchFilters label="Intolerance" filters={Intolerances} selectedFilters={intolerances} changeFilter={setIntolerances}></SearchFilters>
           
@@ -94,7 +99,7 @@ const Recipes = () => {
                 <div 
                   className="w-64 h-64 cursor-pointer relative shadow-sm shadow-black rounded-md m-3 hover:brightness-110" 
                   key={idx}
-                  onClick={() => navigate('recipes/' + recipe.title.replace(" ", "-") + "-" + recipe.id)}
+                  onClick={() => navigate(recipe.spoonacularSourceUrl)}
                 >
                   <ExportedImage 
                     fill
