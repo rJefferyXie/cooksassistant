@@ -31,9 +31,6 @@ const Recipes = () => {
   // Search Results
   const [recipes, setRecipes] = useState([]);
 
-  // View Recipe
-  const [currentRecipe, setCurrentRecipe] = useState();
-
   const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   }
@@ -81,7 +78,7 @@ const Recipes = () => {
             </button>
           </div>
 
-          <div className="flex flex-wrap bg-slate-50 content-start justify-center p-2 w-full h-full border border-gray-200">
+          <div className="flex flex-wrap overflow-auto bg-slate-50 content-start justify-center p-2 w-full h-full border border-gray-200">
             {!recipes.length && 
               <div className="flex flex-col h-full w-full text-slate-900">
                 <p className="m-auto">
@@ -116,10 +113,6 @@ const Recipes = () => {
           </div>
         </div>
       </div>
-
-      {currentRecipe &&
-        <RecipeView></RecipeView>
-      }
     </div>
   )
 }
