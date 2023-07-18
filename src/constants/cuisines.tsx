@@ -1,3 +1,5 @@
+// https://spoonacular.com/food-api/docs#Cuisines
+
 const Cuisines = [
   "African",
   "Asian",

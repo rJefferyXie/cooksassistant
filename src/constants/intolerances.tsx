@@ -1,3 +1,5 @@
+// https://spoonacular.com/food-api/docs#Intolerances
+
 const Intolerances = [
   "Dairy",
   "Egg",

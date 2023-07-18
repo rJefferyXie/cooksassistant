@@ -1,3 +1,5 @@
+// https://spoonacular.com/food-api/docs#Diets
+
 const Diets = [
   "Gluten Free",
   "Ketogenic",
