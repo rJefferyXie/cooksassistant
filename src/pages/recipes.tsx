@@ -8,6 +8,9 @@ import Navbar from "@/components/navbar";
 import RecipeView from "@/components/recipeView";
 import SearchFilters from "@/components/searchFilters";
 
+// Interfaces
+import Recipe from "@/interfaces/recipe";
+
 // Constants
 import Diets from "@/constants/diets";
 import Cuisines from "@/constants/cuisines";
@@ -90,7 +93,7 @@ const Recipes = () => {
               </div>
             }
             
-            {recipes.map((recipe, idx) => {
+            {recipes.map((recipe: Recipe, idx: number) => {
               return (
                 <div 
                   className="w-64 h-64 cursor-pointer relative shadow-sm shadow-black rounded-md m-3 hover:brightness-110" 
