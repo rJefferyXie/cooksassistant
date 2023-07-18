@@ -44,9 +44,9 @@ const Hero = () => {
               >
                 Get started!
               </a>
-              <a className="text-sm cursor-pointer font-semibold leading-6 text-gray-900" onClick={() => navigate("about")}>
+              {/* <a className="text-sm cursor-pointer font-semibold leading-6 text-gray-900" onClick={() => navigate("about")}>
                 Learn more <span aria-hidden="true">→</span>
-              </a>
+              </a> */}
             </div>
           </div>
         </div>
