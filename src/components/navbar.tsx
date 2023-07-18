@@ -9,8 +9,8 @@ import { Bars3Icon, XMarkIcon, CakeIcon } from '@heroicons/react/24/outline';
 const navigation = [
   { name: 'About', href: 'about' },
   { name: 'Recipes', href: 'recipes' },
-  { name: 'Community', href: '#' },
-  { name: 'My Profile', href: '#' },
+  { name: 'Community', href: '' },
+  { name: 'My Profile', href: '' },
 ]
 
 const Navbar = () => {
@@ -23,12 +23,12 @@ const Navbar = () => {
   }
 
   return (
-    <header className="absolute inset-x-0 top-0 z-50">
+    <header className={`absolute inset-x-0 top-0 z-40 ${router.asPath !== '/' && 'bg-white'}`}>
       <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <a onClick={() => navigate("/")}  className="flex -m-1.5 p-1.5 items-center cursor-pointer" aria-hidden="true">
             <CakeIcon className="h-8 w-8 mr-2 text-gray-900"/>
-            <span className="text-gray-900 font-bold">{"Cook's Assistant"}</span>
+            <span className="text-gray-900 text-xl font-semibold">Cook&apos;s Assistant</span>
           </a>
         </div>
         <div className="flex lg:hidden">
@@ -49,7 +49,7 @@ const Navbar = () => {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <a className="text-sm font-semibold cursor-pointer leading-6 text-gray-900">
             Log in <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
@@ -77,7 +77,6 @@ const Navbar = () => {
                 {navigation.map((item) => (
                   <a
                     key={item.name}
-                    href={item.href}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
                     {item.name}
@@ -86,7 +85,6 @@ const Navbar = () => {
               </div>
               <div className="py-6">
                 <a
-                  href="#"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Log in
