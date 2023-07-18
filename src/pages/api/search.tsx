@@ -1,29 +1,33 @@
+// Axios
 import axios from 'axios';
 
 interface RecipeParams {
-  cuisine?: string,
-  diet?: string,
-  intolerance?: string
+  query: string,
+  cuisines: string[],
+  diets: string[],
+  intolerances: string[]
 }
 
-async function getRecipes(params: RecipeParams) {
+const getRecipes = async (params: RecipeParams) => {
   try {
-    const response = await axios.get('https://api.spoonacular.com/recipes/complexSearch', {
-      params: {
-        apiKey: process.env.NEXT_PUBLIC_SPOONACULAR_KEY,
-        cuisine: params.cuisine,
-        diet: params.diet,
-        intolerance: params.intolerance,
-        includeNutrition: false // Set it to true if you want to include nutrition information
+    const response = await axios.get(
+      `https://api.spoonacular.com/recipes/complexSearch?` +
+      `query=${params.query}` + 
+      (params.cuisines.length ? `&cuisines=${params.cuisines}` : '') +
+      (params.diets.length ? `&diets=${params.diets}` : '') +
+      (params.intolerances.length ? `&intolerances=${params.intolerances}` : '') +
+      `&instructionsRequired=true` +
+      `&addRecipeInformation=true` +
+      `&addRecipeNutrition=true` +
+      `&number=10`, {
+      headers: {
+        'x-api-key': process.env.NEXT_PUBLIC_SPOONACULAR_KEY
       }
     });
 
-    // Handle the response data
-    const recipeData = response.data;
-    console.log('Recipe Title:', recipeData.title);
-    console.log('Recipe Instructions:', recipeData.instructions);
+    console.log(params)
 
-
+    return response.data.results;
   } catch (error: any) {
     console.error('Error:', error.message);
   }
