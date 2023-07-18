@@ -53,7 +53,7 @@ const SearchFilters = (props: React.PropsWithChildren<SearchFiltersProps>) => {
                     />
                     <label
                       htmlFor={`filter-${filter}-${idx}`}
-                      className="ml-3 text-sm text-gray-600 font"
+                      className="ml-3 text-sm capitalize text-gray-600 font"
                     >
                       {filter}
                     </label>
