@@ -16,3 +16,5 @@ const Types = [
   "snack",
   "drink"
 ]
+
+export default Types;
