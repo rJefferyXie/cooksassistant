@@ -5,7 +5,6 @@ import ExportedImage from "next-image-export-optimizer";
 
 // Components
 import Navbar from "@/components/navbar";
-import RecipeView from "@/components/recipeView";
 import SearchFilters from "@/components/searchFilters";
 
 // Interfaces
