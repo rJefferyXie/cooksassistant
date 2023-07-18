@@ -13,9 +13,9 @@ const getRecipes = async (params: RecipeParams) => {
     const response = await axios.get(
       `https://api.spoonacular.com/recipes/complexSearch?` +
       `query=${params.query}` + 
-      (params.cuisines.length ? `&cuisines=${params.cuisines}` : '') +
-      (params.diets.length ? `&diets=${params.diets}` : '') +
-      (params.intolerances.length ? `&intolerances=${params.intolerances}` : '') +
+      (params.cuisines.length ? `&cuisine=${params.cuisines}` : '') +
+      (params.diets.length ? `&diet=${params.diets}` : '') +
+      (params.intolerances.length ? `&intolerance=${params.intolerances}` : '') +
       `&instructionsRequired=true` +
       `&addRecipeInformation=true` +
       `&addRecipeNutrition=true` +
@@ -25,7 +25,17 @@ const getRecipes = async (params: RecipeParams) => {
       }
     });
 
+    console.log(`https://api.spoonacular.com/recipes/complexSearch?` +
+    `query=${params.query}` + 
+    (params.cuisines.length ? `&cuisine=${params.cuisines}` : '') +
+    (params.diets.length ? `&diet=${params.diets}` : '') +
+    (params.intolerances.length ? `&intolerance=${params.intolerances}` : '') +
+    `&instructionsRequired=true` +
+    `&addRecipeInformation=true` +
+    `&addRecipeNutrition=true` +
+    `&number=10`)
     console.log(params)
+    console.log(response.data.results)
 
     return response.data.results;
   } catch (error: any) {
