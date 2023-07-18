@@ -4,6 +4,9 @@ on:
   push:
     branches: [ main ]
 
+env:
+  NEXT_PUBLIC_SPOONACULAR_KEY: ${{secrets.NEXT_PUBLIC_SPOONACULAR_KEY}}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
