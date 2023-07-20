@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import ExportedImage from "next-image-export-optimizer";
 
 // Components
-import Navbar from "@/components/navbar";
 import SearchFilters from "@/components/searchFilters";
 
 // Interfaces
@@ -57,8 +56,6 @@ const Recipes = () => {
 
   return (
     <div className="bg-white overflow-auto h-screen w-screen flex flex-col">
-      <Navbar></Navbar>
-
       <div className="flex flex-col h-5/6 mt-24 w-full px-10">
         <div className="flex h-full w-full">
           <div className="flex-col p-4 w-80 h-full overflow-auto border border-gray-200">
@@ -82,7 +79,7 @@ const Recipes = () => {
             </button>
           </div>
 
-          <div className="flex flex-wrap overflow-auto bg-slate-50 content-start justify-center p-2 w-full h-full border border-gray-200">
+          <div className="flex flex-wrap overflow-auto bg-blue-50 content-start justify-center p-2 w-full h-full border border-l-0 border-gray-200">
             {!recipes.length && 
               <div className="flex flex-col h-full w-full text-slate-900">
                 <p className="m-auto">

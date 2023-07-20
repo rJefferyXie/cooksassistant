@@ -1,9 +1,6 @@
 // React + Next
 import { useRouter } from 'next/router';
 
-// Components
-import Navbar from '@/components/navbar';
-
 const Hero = () => {
   const router = useRouter();
 
@@ -13,8 +10,6 @@ const Hero = () => {
 
   return (
     <div className="bg-white h-screen overflow-hidden">
-      <Navbar></Navbar>
-
       <div className="relative isolate px-6 pt-14 lg:px-8">
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
