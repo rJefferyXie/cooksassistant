@@ -17,7 +17,7 @@ const getRecipes = async (params: RecipeParams) => {
       (params.diets.length ? `&diet=${params.diets}` : '') +
       (params.types.length ? `&type=${params.types}` : '') +
       (params.cuisines.length ? `&cuisine=${params.cuisines}` : '') +
-      (params.intolerances.length ? `&intolerance=${params.intolerances}` : '') +
+      (params.intolerances.length ? `&intolerances=${params.intolerances}` : '') +
       `&instructionsRequired=true` +
       `&addRecipeInformation=true` +
       `&addRecipeNutrition=true` +
