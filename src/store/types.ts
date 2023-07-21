@@ -1,9 +1,6 @@
 enum RECIPE {
   VIEW_RECIPE = 'VIEW_RECIPE',
-  EXIT_RECIPE = 'EXIT_RECIPE'
-}
-
-enum RECIPES {
+  EXIT_RECIPE = 'EXIT_RECIPE',
   SET_RECIPES = 'SET_RECIPES',
 }
 
@@ -17,6 +14,5 @@ enum SEARCH {
 
 export {
   RECIPE,
-  RECIPES,
   SEARCH
 }
