@@ -19,7 +19,7 @@ const persistConfig = {
   key: 'root', 
   version: 1,
   storage: storage,
-  // blacklist: ['card', 'deck']
+  blacklist: ['recipe', 'search']
 };
 
 // For persisting data when the window/tab is closed
