@@ -1,13 +1,19 @@
 // React + Next
-import { useState } from "react";
 import { useRouter } from "next/router";
-import ExportedImage from "next-image-export-optimizer";
+
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import recipeActions from "@/store/actions/recipeActions";
+import SearchActions from "@/store/actions/searchActions";
 
 // Components
 import SearchFilters from "@/components/searchFilters";
+import RecipePreview from "@/components/recipePreview";
+import SearchExample from "@/components/searchExample";
 
 // Interfaces
 import Recipe from "@/interfaces/recipe";
+import RecipeParams from "@/interfaces/recipeSearch";
 
 // Constants
 import Diets from "@/constants/diets";
@@ -18,34 +24,40 @@ import Intolerances from "@/constants/intolerances";
 // API
 import getRecipes from "./api/search";
 
+// Images
+import asianChicken from '../../public/images/asian-chicken.jpg';
+import veganGlutenFree from '../../public/images/vegan-gluten-free.jpg';
+import chocolateDesserts from '../../public/images/chocolate-desserts.jpg';
+
 const Recipes = () => {
   const router = useRouter();
 
-  // Search Params
-  const [query, setQuery] = useState('');
-  const [diets, setDiets] = useState<string[]>([]);
-  const [types, setTypes] = useState<string[]>([]);
-  const [cuisines, setCuisines] = useState<string[]>([]);
-  const [intolerances, setIntolerances] = useState<string[]>([]);
-
-  // Search Results
-  const [recipes, setRecipes] = useState([]);
+  // Redux
+  const dispatch = useDispatch();
+  const recipeState = useSelector((state: any) => state.recipe);
+  const searchState = useSelector((state: any) => state.search);
 
   const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
+    SearchActions.setQuery(e.target.value);
   }
 
-  const search = () => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.code === "Enter") {
+      search();
+    }
+  }
+
+  const search = (customParams?: RecipeParams) => {
     const params = {
-      query: query,
-      diets: diets,
-      types: types,
-      cuisines: cuisines,
-      intolerances: intolerances
+      query: searchState.query,
+      diets: searchState.diets,
+      types: searchState.types,
+      cuisines: searchState.cuisines,
+      intolerances: searchState.intolerances
     }
 
-    getRecipes(params).then((recipes) => {
-      setRecipes(recipes);
+    getRecipes(customParams || params).then((recipes) => {
+      dispatch(recipeActions.setRecipes(recipes));
     });
   }
 
@@ -55,60 +67,84 @@ const Recipes = () => {
   }
 
   return (
-    <div className="bg-white overflow-auto h-screen w-screen flex flex-col">
+    <div className="bg-white h-screen w-screen flex flex-col">
       <div className="flex flex-col h-5/6 mt-24 w-full px-10">
         <div className="flex h-full w-full">
-          <div className="flex-col p-4 w-80 h-full overflow-auto border border-gray-200">
-            <label className="text-slate-900 font-semibold text-center w-full">Enter Ingredient or Dish</label>
+          <div className="flex-col p-4 w-80 h-full rounded-md overflow-auto border border-gray-200">
+            <p className="text-slate-900 font-semibold text-center w-full">Enter Ingredient or Dish</p>
             <input 
               className="border border-gray-200 p-1 mt-1 w-full rounded-md text-slate-900" 
               placeholder="Ex. Spring Rolls, Chicken, Tofu, ..." 
-              value={query} 
+              value={searchState.query} 
+              onKeyDown={handleKeyDown}
               onChange={handleQueryChange}
             />
 
-            <SearchFilters label="Diet" filters={Diets} selectedFilters={diets} changeFilter={setDiets}></SearchFilters>
-            <SearchFilters label="Type" filters={Types} selectedFilters={types} changeFilter={setTypes}></SearchFilters>
-            <SearchFilters label="Cuisine" filters={Cuisines} selectedFilters={cuisines} changeFilter={setCuisines}></SearchFilters>
-            <SearchFilters label="Intolerance" filters={Intolerances} selectedFilters={intolerances} changeFilter={setIntolerances}></SearchFilters>
+            <SearchFilters 
+              label="Diet" 
+              filters={Diets} 
+              selectedFilters={searchState.diets} 
+              changeFilter={(diets: string[]) => dispatch(SearchActions.setDiets(diets))}
+            />
+
+            <SearchFilters 
+              label="Type" 
+              filters={Types} 
+              selectedFilters={searchState.types} 
+              changeFilter={(types: string[]) => dispatch(SearchActions.setTypes(types))}
+            />
+
+            <SearchFilters 
+              label="Cuisine" 
+              filters={Cuisines} 
+              selectedFilters={searchState.cuisines} 
+              changeFilter={(cuisines: string[]) => dispatch(SearchActions.setCuisines(cuisines))}
+            />
+
+            <SearchFilters 
+              label="Intolerance" 
+              filters={Intolerances} 
+              selectedFilters={searchState.intolerances} 
+              changeFilter={(intolerances: string[]) => dispatch(SearchActions.setIntolerances(intolerances))}
+            />
           
-            <button className="mt-4 mb-0 w-full" onClick={search}>
+            <button className="mt-4 mb-0 w-full" onClick={() => search()}>
               <p className="rounded-md bg-sky-700 px-3.5 py-2.5 cursor-pointer text-sm font-semibold text-white shadow-sm hover:bg-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
                 Search Recipes!
               </p>
             </button>
           </div>
 
-          <div className="flex flex-wrap overflow-auto bg-blue-50 content-start justify-center p-2 w-full h-full border border-l-0 border-gray-200">
-            {!recipes.length && 
-              <div className="flex flex-col h-full w-full text-slate-900">
-                <p className="m-auto">
-                  Try searching for a recipe!
-                </p>
-                <p>
-                  
-                </p>
+          <div className="flex flex-wrap overflow-auto content-center justify-center w-full h-full rounded-md border border-l-0 border-gray-200 relative">
+            <div className="absolute w-full h-full bg-gradient-to-tr from-cyan-400 via-blue-400 to-pink-400 opacity-5"></div>
+            
+            {!recipeState.recipes.length && 
+              <div className="flex flex-col h-full w-full text-slate-900 z-10">
+                <p className="m-auto mb-1 font-semibold">Search For Your New Favourite Recipes!</p>
+                <ul className="m-auto my-1 list-disc">
+                  <li>Tailor your search to match your specific diet! Choose from 11 different dietary options to filter your search results.</li>
+                  <li>Embark on a culinary adventure with our extensive range of 14 delightful meal types, including breakfasts, appetizers, and desserts!</li>
+                  <li>Indulge your cravings with a world of flavors! Explore our diverse selection of 27 cuisines from around the world.</li>
+                  <li>Filter recipes based on your dietary needs and restrictions!</li>
+                </ul>
+                <p></p>
+
+                <p className="m-auto m8-4 mb-1 font-semibold">Examples</p>
+                <div className="flex justify-center mb-auto">
+                  <SearchExample image={asianChicken.src} label={"Asian-Inspired Chicken Recipes"} query={"Chicken"} cuisines={["Asian"]} search={search}></SearchExample>
+                  <SearchExample image={veganGlutenFree.src} label={"Vegan & Gluten Free"} query={""} diets={["Vegan"]} intolerances={["Gluten"]} search={search}></SearchExample>
+                  <SearchExample image={chocolateDesserts.src} label={"Chocolate Desserts"} query={"Chocolate"} types={["Dessert"]} search={search}></SearchExample>
+                </div>
               </div>
             }
             
-            {recipes.map((recipe: Recipe, idx: number) => {
+            {recipeState.recipes.map((recipe: Recipe, idx: number) => {
               return (
-                <div 
-                  className="w-64 h-64 cursor-pointer relative shadow-sm shadow-black rounded-md m-3 hover:brightness-110" 
-                  key={idx}
-                  onClick={() => navigate(recipe.spoonacularSourceUrl)}
-                >
-                  <ExportedImage 
-                    fill
-                    style={{ objectFit: "cover" }}      
-                    src={recipe.image}
-                    alt={`An image of ${recipe.title}`}
-                    className="rounded-md"
-                  />
-                  <div className="text-slate-900 py-1 rounded-b-md w-full flex bg-zinc-700 bottom-0 absolute">
-                    <p className="text-white text-center capitalize truncate w-5/6 m-auto">{recipe.title}</p>
-                  </div>
-                </div>
+                <RecipePreview 
+                  key={idx} 
+                  recipe={recipe} 
+                  navigate={navigate}
+                />
               )
             })}
           </div>
