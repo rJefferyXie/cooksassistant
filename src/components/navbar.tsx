@@ -23,7 +23,7 @@ const Navbar = () => {
   }
 
   return (
-    <header className={`absolute inset-x-0 top-0 z-40 ${router.asPath !== '/' && 'bg-white'}`}>
+    <header className={`absolute select-none inset-x-0 top-0 z-40 ${router.asPath !== '/' && 'bg-white'}`}>
       <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <a onClick={() => navigate("/")}  className="flex -m-1.5 p-1.5 items-center cursor-pointer" aria-hidden="true">
