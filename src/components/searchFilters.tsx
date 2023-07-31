@@ -23,7 +23,7 @@ const SearchFilters = (props: React.PropsWithChildren<SearchFiltersProps>) => {
   }
 
   return (
-    <form className="hidden lg:block">
+    <form className="lg:block">
       <Disclosure as="div" className="border-b border-gray-200 py-5">
         {({ open }) => (
           <>
