@@ -1,5 +1,6 @@
-// React + Next
-import ExportedImage from 'next-image-export-optimizer';
+// Redux
+import { useDispatch } from "react-redux";
+import recipeActions from "@/store/actions/recipeActions";
 
 // Interfaces
 import Recipe from "@/interfaces/recipe";
@@ -11,18 +12,24 @@ interface RecipePreviewProps {
 
 const RecipePreview = (props: React.PropsWithChildren<RecipePreviewProps>) => {
   const { recipe, navigate } = props;
+  
+  // Redux
+  const dispatch = useDispatch()
+
+  const viewRecipe = () => {
+    dispatch(recipeActions.viewRecipe(recipe));
+    navigate(recipe.spoonacularSourceUrl);
+  }
 
   return (
     <div 
-      className="w-64 h-64 cursor-pointer relative shadow-sm shadow-black rounded-md m-3 hover:brightness-110 hover:scale-105 duration-300" 
-      onClick={() => navigate(recipe.spoonacularSourceUrl)}
+      className="w-36 h-36 sm:w-48 sm:h-48 md:w-64 md:h-64 cursor-pointer relative shadow-sm shadow-black rounded-md m-2 hover:brightness-110 hover:scale-105 duration-300" 
+      onClick={viewRecipe}
     >
-      <ExportedImage 
-        fill
-        style={{ objectFit: "cover" }}      
+      <img
         src={recipe.image}
         alt={`An image of ${recipe.title}`}
-        className="rounded-md"
+        className="rounded-md object-cover h-full w-full"
       />
       
       <div className="text-slate-900 py-1 rounded-b-md w-full flex bg-zinc-700 bottom-0 absolute">
