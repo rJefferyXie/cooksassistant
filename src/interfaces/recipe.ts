@@ -8,6 +8,21 @@ interface Instructions {
   steps: Instruction[]
 }
 
+interface Ingredient {
+  name: string,
+  amount: number,
+  unit: string
+}
+
+interface Nutrition {
+  caloricBreakdown: {
+    percentCarbs: number,
+    percentFat: number,
+    percentProtein: number
+  },
+  ingrdients: Ingredient[]
+}
+
 interface Recipe {
   id: number,
   title: string,
@@ -15,6 +30,9 @@ interface Recipe {
   spoonacularSourceUrl: string,
   readyInMinutes: number,
   servings: number,
+  summary: string,
+  nutrition: Nutrition,
+  ingrdients: string[],
   vegetarian: boolean,
   vegan: boolean,
   glutenFree: boolean,
