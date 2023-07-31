@@ -67,10 +67,10 @@ const Recipes = () => {
   }
 
   return (
-    <div className="bg-white h-screen w-screen flex flex-col">
-      <div className="flex flex-col h-5/6 mt-24 w-full px-10">
-        <div className="flex h-full w-full">
-          <div className="flex-col p-4 w-80 h-full rounded-md overflow-auto border border-gray-200">
+    <div className="bg-white h-full w-full md:h-screen md:w-screen flex">
+      <div className="flex h-5/6 mt-24 w-full px-4 md:px-10">
+        <div className="flex flex-col md:flex-row h-full w-full">
+          <div className="flex-col p-4 w-full md:w-80 h-full rounded-md overflow-auto border border-gray-200">
             <p className="text-slate-900 font-semibold text-center w-full">Enter Ingredient or Dish</p>
             <input 
               className="border border-gray-200 p-1 mt-1 w-full rounded-md text-slate-900" 
@@ -115,11 +115,11 @@ const Recipes = () => {
             </button>
           </div>
 
-          <div className="flex flex-wrap overflow-auto content-center justify-center w-full h-full rounded-md border border-l-0 border-gray-200 relative">
+          <div className="flex flex-wrap overflow-auto content-center justify-center w-full h-full rounded-md border mb:border-l-0 my-4 md:mt-0 border-gray-200 relative">
             <div className="absolute w-full h-full bg-gradient-to-tr from-cyan-400 via-blue-400 to-pink-400 opacity-5"></div>
             
             {!recipeState.recipes.length && 
-              <div className="flex flex-col h-full w-full text-slate-900 z-10">
+              <div className="flex flex-col h-full w-full p-6 text-slate-900 z-10">
                 <p className="m-auto mb-1 font-semibold">Search For Your New Favourite Recipes!</p>
                 <ul className="m-auto my-1 list-disc">
                   <li>Tailor your search to match your specific diet! Choose from 11 different dietary options to filter your search results.</li>
@@ -130,7 +130,7 @@ const Recipes = () => {
                 <p></p>
 
                 <p className="m-auto m8-4 mb-1 font-semibold">Examples</p>
-                <div className="flex justify-center mb-auto">
+                <div className="flex flex-wrap justify-center mb-auto">
                   <SearchExample image={asianChicken.src} label={"Asian-Inspired Chicken Recipes"} query={"Chicken"} cuisines={["Asian"]} search={search}></SearchExample>
                   <SearchExample image={veganGlutenFree.src} label={"Vegan & Gluten Free"} query={""} diets={["Vegan"]} intolerances={["Gluten"]} search={search}></SearchExample>
                   <SearchExample image={chocolateDesserts.src} label={"Chocolate Desserts"} query={"Chocolate"} types={["Dessert"]} search={search}></SearchExample>
