@@ -42,7 +42,7 @@ const SearchExample = (props: React.PropsWithChildren<SearchExampleProps>) => {
 
   return (
     <button 
-      className="m-3 w-64 h-64 relative rounded-md hover:scale-105 hover:brightness-110 duration-300"
+      className="m-3 w-32 h-32 md:w-64 md:h-64 relative rounded-md hover:scale-105 hover:brightness-110 duration-300"
       onClick={handleClick}
     >
       <ExportedImage 
@@ -54,7 +54,7 @@ const SearchExample = (props: React.PropsWithChildren<SearchExampleProps>) => {
       />
 
       <div className="text-slate-900 py-1 rounded-b-md w-full flex bg-zinc-700 bottom-0 absolute">
-        <p className="text-white text-center capitalize truncate w-full m-auto">
+        <p className="text-white text-center capitalize truncate w-full m-auto px-1">
           {label}
         </p>
       </div>                  
