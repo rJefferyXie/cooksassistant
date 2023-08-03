@@ -33,12 +33,12 @@ const Hero = () => {
               Whether you&apos;re a seasoned chef or a cooking enthusiast, explore our diverse range of recipes and bring mouthwatering dishes to your table with ease.
             </p>
             <div className="mt-5 flex items-center justify-center gap-x-6">
-              <a
+              <button
                 onClick={() => navigate("recipes")}
-                className="rounded-md bg-sky-700 px-3.5 py-2.5 cursor-pointer text-sm font-semibold text-white shadow-sm hover:bg-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+                className="rounded-md bg-sky-700 px-3.5 py-2.5 cursor-pointer text-sm font-semibold text-white shadow-sm hover:bg-sky-600 duration-300 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
               >
                 Get started!
-              </a>
+              </button>
               {/* <a className="text-sm cursor-pointer font-semibold leading-6 text-gray-900" onClick={() => navigate("about")}>
                 Learn more <span aria-hidden="true">→</span>
               </a> */}

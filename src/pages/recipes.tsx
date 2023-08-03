@@ -108,7 +108,7 @@ const Recipes = () => {
               changeFilter={(intolerances: string[]) => dispatch(SearchActions.setIntolerances(intolerances))}
             />
           
-            <button className="mt-4 mb-0 w-full" onClick={() => search()}>
+            <button className="mt-4 mb-0 w-full hover:brightness-110 duration-300 ease-in-out" onClick={() => search()}>
               <p className="rounded-md bg-sky-700 px-3.5 py-2.5 cursor-pointer text-sm font-semibold text-white shadow-sm hover:bg-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
                 Search Recipes!
               </p>
