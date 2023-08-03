@@ -53,15 +53,15 @@ const Recipe = () => {
   };
 
   return (
-    <div className="w-screen min-h-screen h-full mt-20 z-50 bg-white text-black">
+    <div className="w-screen min-h-screen h-full flex flex-col mt-20 z-50 bg-white text-black">
       <button 
-        className="bg-red-200 px-2 py-1 mt-2 ml-4 rounded-md hover:bg-red-100 duration-300 ease-in-out"
+        className="bg-red-200 px-2 py-1 my-2 mx-auto rounded-md hover:bg-red-100 duration-300 ease-in-out"
         onClick={() => router.back()}
       >
         Back to Recipes
       </button>
 
-      <h1 className="font-semibold m-auto mt-2 text-center">{recipe.title}</h1>
+      <h1 className="font-semibold m-auto text-center">{recipe.title}</h1>
 
       <div className="flex">
         <p className="m-auto md:ml-auto md:mr-2">{"Cooking Time: " + recipe.readyInMinutes + " Minutes"}</p>
