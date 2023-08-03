@@ -20,7 +20,7 @@ interface Nutrition {
     percentFat: number,
     percentProtein: number
   },
-  ingrdients: Ingredient[]
+  ingredients: Ingredient[]
 }
 
 interface Recipe {
@@ -32,7 +32,6 @@ interface Recipe {
   servings: number,
   summary: string,
   nutrition: Nutrition,
-  ingredients: string[],
   vegetarian: boolean,
   vegan: boolean,
   glutenFree: boolean,
