@@ -32,7 +32,7 @@ interface Recipe {
   servings: number,
   summary: string,
   nutrition: Nutrition,
-  ingrdients: string[],
+  ingredients: string[],
   vegetarian: boolean,
   vegan: boolean,
   glutenFree: boolean,
